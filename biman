@@ -1,0 +1,23 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import commands, sys, urllib, webbrowser
+
+def _main():
+    if len(sys.argv) == 2:
+        com = sys.argv[1]
+        url = 'http://bijo-linux.com/girls/%s/' % com
+
+        f = urllib.urlopen(url)
+        p = f.read()
+        f.close()
+
+        if p.find('<title>ページが見つかりませんでした') > -1:
+            print commands.getoutput('man %s' % com)
+        else:
+            webbrowser.open(url)
+    else:
+        sys.exit('What manual page do you want?')
+
+if __name__ == '__main__':
+    _main()
